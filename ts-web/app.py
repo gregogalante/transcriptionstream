@@ -4,6 +4,8 @@ import os
 import shutil
 from datetime import datetime
 
+print("🚀 Starting Transcription Stream Web Server - 1")
+
 app = Flask(__name__)
 # Use the TS_WEB_SECRET_KEY environment variable as the secret key, and the fallback
 app.secret_key = os.environ.get('TS_WEB_SECRET_KEY', 'some_secret_key')
