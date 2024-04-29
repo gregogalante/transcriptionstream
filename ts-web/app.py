@@ -21,7 +21,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     # Reset the session variable on page load
     session['alerted_folders'] = []
