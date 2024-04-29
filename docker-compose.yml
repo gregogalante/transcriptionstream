@@ -48,7 +48,7 @@ services:
       - TS_WEB_SECRET_KEY=${TS_WEB_SECRET_KEY}
     container_name: ts-web
     ports:
-      - "5006:5000"
+      - "5006:5123"
     volumes:
       - transcriptionstream:/transcriptionstream
     networks:
