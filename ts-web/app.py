@@ -4,7 +4,7 @@ import os
 import shutil
 from datetime import datetime
 
-print("🚀 Starting Transcription Stream Web Server - 1")
+print("🚀 Starting Transcription Stream Web Server - 2")
 
 app = Flask(__name__)
 # Use the TS_WEB_SECRET_KEY environment variable as the secret key, and the fallback
@@ -146,4 +146,4 @@ def delete_folder(folder):
         return jsonify(success=False, error='Failed to delete folder'), 500    
     
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5123)
