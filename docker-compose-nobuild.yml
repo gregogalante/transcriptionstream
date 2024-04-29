@@ -75,7 +75,7 @@ services:
 
 
 # if you want to run ollama locally and have enough vram uncomment this section
-#  # Startup ts-gpt
+# Startup ts-gpt
   ts_gpt_service:
     image: ollama/ollama
     container_name: ts-gpt
