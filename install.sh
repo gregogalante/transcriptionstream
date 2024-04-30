@@ -50,7 +50,7 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
 
     # Start the docker-compose services
     echo "Starting services with docker-compose..."
-    docker-compose up --detach
+    docker compose up --detach
 
    # Get the model installed on ts-gpt (requires curl)
    # only if ollama is enabled in docker-compose.yaml
@@ -59,7 +59,7 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
 
     # Re-attach to compose logs
     echo "Re-attaching to console logs"
-    docker-compose logs -f
+    docker compose logs -f
 
     echo "All services are up and running."
 else
