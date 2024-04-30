@@ -74,6 +74,14 @@ chmod +x run.sh;
 ./run.sh
 ```
 
+## Build and Run Local (only web)
+> If you'd like to build the images locally
+### Automated Install and Run
+```bash
+chmod +x dev.sh;
+./dev.sh;
+```
+
 ## Additional Information
 
 ### Ports
