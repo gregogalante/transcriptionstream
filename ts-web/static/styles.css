@@ -108,7 +108,7 @@ body {
 #alertContainer {
     position: fixed;
     top: 30px;
-    left: 40px;
+    left: 30px;
     z-index: 3000;
     background-color: #fff; /* Or the background color of your controls area */
    /* border: 1px solid #ccc; /* Optional: Add a border */
@@ -209,8 +209,8 @@ body #alertContainer {
 }
 
 #gearsIcon {
-    width: 30px; /* Adjust as needed */
-    height: 30px; /* Adjust as needed */
+    width: 120px; /* Adjust as needed */
+    height: auto; /* Adjust as needed */
 }
 
 .audio-time-control {
