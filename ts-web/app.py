@@ -42,6 +42,21 @@ def index():
     
     return render_template('index.html', folders=sorted_folders)
 
+@app.route('/folders', methods=['GET'])
+def apis_index():
+    folder_paths = [os.path.join(TRANSCRIBED_FOLDER, f) for f in os.listdir(TRANSCRIBED_FOLDER) if os.path.isdir(os.path.join(TRANSCRIBED_FOLDER, f))]
+
+    # Filter folders to only include those containing an .srt file
+    valid_folders = []
+    for folder in folder_paths:
+        files = os.listdir(folder)
+        if any(file.endswith('.srt') for file in files):
+            valid_folders.append(os.path.basename(folder))
+    
+    sorted_folders = sorted(valid_folders, key=lambda s: s.lower())  # Sorting by name in ascending order, case-insensitive
+
+    return jsonify(folders=sorted_folders)
+
 @app.route('/load_files', methods=['POST'])
 def load_files():
     folder = request.form.get('folder')
@@ -82,14 +97,21 @@ def upload_file():
     
 @app.route('/upload_transcribe', methods=['POST'])
 def upload_transcribe():
+    response_format = request.form.get('response_format', 'html')
     if 'file' not in request.files:
+        if response_format == 'json':
+            return jsonify(error='No file part'), 400
         return redirect(request.url)
     file = request.files['file']
     if file.filename == '':
+        if response_format == 'json':
+            return jsonify(error='No selected file'), 400
         return redirect(request.url)
     if file:
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'transcribe', filename))
+        if response_format == 'json':
+            return jsonify(success=True)
         return render_template('upload.html', message="File uploaded successfully to Transcribe!")
 
 @app.route('/upload_diarize', methods=['POST'])
@@ -143,7 +165,7 @@ def delete_folder(folder):
         return jsonify(success=True)
     except Exception as e:
         print(f"Error deleting folder: {e}")
-        return jsonify(success=False, error='Failed to delete folder'), 500    
+        return jsonify(success=False, error='Failed to delete folder'), 500
     
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
