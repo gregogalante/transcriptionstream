@@ -116,14 +116,21 @@ def upload_transcribe():
 
 @app.route('/upload_diarize', methods=['POST'])
 def upload_diarize():
+    response_format = request.form.get('response_format', 'html')
     if 'file' not in request.files:
+        if response_format == 'json':
+            return jsonify(error='No file part'), 400
         return redirect(request.url)
     file = request.files['file']
     if file.filename == '':
+        if response_format == 'json':
+            return jsonify(error='No selected file'), 400
         return redirect(request.url)
     if file:
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'diarize', filename))
+        if response_format == 'json':
+            return jsonify(success=True)
         return render_template('upload.html', message="File uploaded successfully to Diarize!")
 
 
