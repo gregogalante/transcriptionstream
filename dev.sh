@@ -32,30 +32,13 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
 	    fi
 	done < "$env_file"
 
-    # Navigate to the ts-web directory and build the Dockerfile
-    echo "Building Docker image for ts-web..."
-    cd ts-web
-    docker build $build_args -t ts-web:latest .
-    cd ..
-
-    # Navigate to the ts-gpu directory and build the Dockerfile
-    echo "Building Docker image for ts-gpu..."
-    cd ts-gpu
-    docker build $build_args -t ts-gpu:latest .
-    cd ..
-
     # Create necessary Docker volumes
     echo "Creating Docker volumes..."
     docker volume create --name=transcriptionstream
 
     # Start the docker-compose services
     echo "Starting services with docker-compose..."
-    docker-compose up --detach
-
-   # Get the model installed on ts-gpt (requires curl)
-   # only if ollama is enabled in docker-compose.yaml
-    echo "Downloading  transcriptionstream mistral model"   
-    curl -X POST http://172.30.1.3:11434/api/pull -d '{"name": "transcriptionstream/transcriptionstream"}'
+    docker-compose -f docker-compose-dev.yml up --detach
 
     # Re-attach to compose logs
     echo "Re-attaching to console logs"

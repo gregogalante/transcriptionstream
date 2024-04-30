@@ -1,0 +1,41 @@
+version: '3.8'
+# transcription stream startup
+#
+# make sure the volumes exist
+services:
+  init:
+    image: busybox
+    volumes:
+      - transcriptionstream:/transcriptionstream
+    command: /bin/sh -c "mkdir -p /transcriptionstream/incoming/transcribe /transcriptionstream/incoming/diarize /transcriptionstream/transcribed /transcriptionstream/scripts && chown -R transcriptionstream:transcriptionstream /transcriptionstream/incoming"
+
+# Start up the web front end
+  ts_web_service:
+    build:
+      context: ./ts-web
+      dockerfile: Dockerfile
+    environment:
+      - TS_WEB_SECRET_KEY=${TS_WEB_SECRET_KEY}
+    container_name: ts-web
+    ports:
+      - "5006:5000"
+    volumes:
+      - transcriptionstream:/transcriptionstream
+    networks:
+      ts_private_network:
+        ipv4_address: 172.30.1.2
+
+networks:
+  ts_private_network:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+
+
+
+volumes:
+  transcriptionstream:
+    external: true
+#  transcriptionstream-scripts:
+#    external: true
+
