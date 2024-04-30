@@ -97,7 +97,7 @@ def upload_file():
     
 @app.route('/upload_transcribe', methods=['POST'])
 def upload_transcribe():
-    response_format = request.form.get('response_format', 'html')
+    response_format = request.args.get('response_format', 'html')
     if 'file' not in request.files:
         if response_format == 'json':
             return jsonify(error='No file part'), 400
@@ -116,7 +116,7 @@ def upload_transcribe():
 
 @app.route('/upload_diarize', methods=['POST'])
 def upload_diarize():
-    response_format = request.form.get('response_format', 'html')
+    response_format = request.args.get('response_format', 'html')
     if 'file' not in request.files:
         if response_format == 'json':
             return jsonify(error='No file part'), 400
