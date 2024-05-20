@@ -31,7 +31,7 @@ RUN pip install numpy
 # Clone only the necessary branch or commit of whisper-diarization to reduce size
 RUN git clone --depth 1 https://github.com/MahmoudAshraf97/whisper-diarization.git && \
     cd whisper-diarization && \
-    git checkout 00aa56cef1db75effb713fb2481ef6e896ac588a
+    git checkout d3e697c
 
 # Install whisper-diarization requirements
 WORKDIR /whisper-diarization
