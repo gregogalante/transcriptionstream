@@ -33,6 +33,7 @@ RUN git clone --depth 1 https://github.com/MahmoudAshraf97/whisper-diarization.g
 
 # Install whisper-diarization requirements
 WORKDIR /whisper-diarization
+RUN git checkout d3e697c
 RUN pip install -r requirements.txt
 
 # Install req for calls to ts-meilisearch
