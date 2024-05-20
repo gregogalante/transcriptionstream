@@ -29,7 +29,8 @@ RUN pip install typing_extensions
 RUN pip install numpy
 
 # Clone only the necessary branch or commit of whisper-diarization to reduce size
-RUN git clone --depth 1 https://github.com/MahmoudAshraf97/whisper-diarization.git#d3e697c
+RUN git clone --depth 1 https://github.com/MahmoudAshraf97/whisper-diarization.git
+RUN cd ./whisper-diarization && git checkout d3e697c
 
 # Install whisper-diarization requirements
 WORKDIR /whisper-diarization
