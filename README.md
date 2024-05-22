@@ -128,4 +128,5 @@ chmod +x dev.sh;
 
 
 ### additional notes
-- To view transcribed files run: "sudo docker exec <container_id> ls /transcriptionstream/transcribed"
+- To view transcribed files run: "sudo docker exec <container_id> <comand (can be ls, cat...)> /path/to/your/folder"
+EXAMPLE: sudo docker exec 932778e71f72 ls /transcriptionstream/transcribed/audio
