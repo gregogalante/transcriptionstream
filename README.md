@@ -125,3 +125,7 @@ chmod +x dev.sh;
 ### To-do
 - Need to fix an issue with ts-web that throws an error to console when loading a transcription when a summary.txt file does not also exist. Lots of other annoyances with ts-web, but it's functional.
 - Need to add a search/control interface to ts-web for Meilisearch
+
+
+### additional notes
+- To view transcribed files run: "sudo docker exec <container_id> ls /transcriptionstream/transcribed"
